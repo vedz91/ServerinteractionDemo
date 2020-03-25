@@ -1,3 +1,6 @@
 [submodule "NetworkServer"]
 	path = NetworkServer
 	url = https://github.com/vedz91/NetworkServer.git
+[submodule "DataServer"]
+	path = DataServer
+	url = https://github.com/vedz91/DataServer.git
