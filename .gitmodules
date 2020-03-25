@@ -1,0 +1,3 @@
+[submodule "NetworkServer"]
+	path = NetworkServer
+	url = https://github.com/vedz91/NetworkServer.git
