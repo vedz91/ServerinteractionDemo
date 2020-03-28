@@ -1,0 +1,15 @@
+version: "2"
+services:
+  network:
+    build: ./NetworkServer
+    networks:
+      - service-network
+    ports:
+      - "9090:9090"
+      - "9091:9091"
+  data:
+    build: ./DataServer
+    networks:
+      - service-network
+networks:
+  service-network:
