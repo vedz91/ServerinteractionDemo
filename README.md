@@ -1,6 +1,7 @@
 # ServerinteractionDemo
 
 The application exposes a NetworkServer which is able to perform calculations like ADD, DELETE,MULTIPLY & SUBTRACT.
+You can read the detailed API Design Document [here](https://github.com/vedz91/ServerinteractionDemo/blob/master/Design%20Document.pdf).
 
 - [Developer Setup](#developer-setup)
 - [Running the Application](#running-the-application)
