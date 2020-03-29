@@ -5,19 +5,22 @@ The application exposes a NetworkServer which is able to perform calculations li
 - [Developer Setup](#developer-setup)
 - [Running the Application](#running-the-application)
 - [Testing](#testing)
+- [Coverage](#coverage)
 - [Logging](#logging)
+- [Troubleshooting](#troubleshooting)
+
 
 ## Developer Setup
 
 1. Make sure you have Docker install in your system. Read the [guide](https://docs.docker.com/install/) on how to install it.
 1. Verify Docker installation
     ```shell script
-   $ >  docker --version                                                                              ✔  35s  2.3.7   seo-platform-itier-staging-us-west-2/seo-platform-itier-staging ⎈ 
+   $ >  docker --version                                                                              
         Docker version 19.03.8, build afacb8b
     ``` 
 1. Verify Docker-Compose installation. It is already included in `Docker for MAC`, for other systems please follow the [installation guide](https://docs.docker.com/compose/install/#install-compose).
     ```shell script
-    $ >  docker-compose --version                                                                             ✔  4s  2.3.7   seo-platform-itier-staging-us-west-2/seo-platform-itier-staging ⎈ 
+    $ >  docker-compose --version                                                                             
         docker-compose version 1.25.4, build 8d51620a
     ```
 1. Update the Submodule dependencies to the latest (If using Git)
@@ -28,7 +31,7 @@ The application exposes a NetworkServer which is able to perform calculations li
 ## Running the Application
 1. Start the dockerized server using [`Docker Compose`](https://docs.docker.com/compose/).
     ```shell script
-    $ >  docker-compose up --build -d                                                                    INT ↵  2.3.7   seo-platform-itier-staging-us-west-2/seo-platform-itier-staging ⎈
+    $ >  docker-compose up --build -d                                                                
     ```
 1. This will build both the NetworkServer & DataServer
     ```shell script
@@ -87,9 +90,24 @@ The application exposes a NetworkServer which is able to perform calculations li
 The app offers the [Swagger](https://swagger.io/) implementation of the available endpoint. You can access it by navigating to
 [`http://localhost:9090/swagger`](http://localhost:9090/swagger).
 
+## Coverage
+
+The applications are using [Jacoco](https://www.eclemma.org/jacoco/) Coverage Library to compute the coverage of the application.
+
+#### Network Server
+Current coverage is `59%`. 
+
+![Coverage](NetworkServer/coverage.png)
+
+#### Data Server
+
+Current coverage is `58%`. 
+
+![Coverage](DataServer/coverage.png)
+
 
 ## Logging
-Currently all the logs are forwarded to the `Console` in both the application to support `Ease of Viewing`. This can be easily changed to file based by changing the logger section in config.yml file to
+Currently all the logs are forwarded to the `Console` in both the application to support `Ease of Viewing`. This can be easily changed to file based by changing the logger section in `config.yml` of each service file to
 ```yaml
 logging:
   level: INFO
@@ -103,11 +121,13 @@ logging:
     org.ServerInteractionDemo: DEBUG
 ```
 
+## Troubleshooting
+
 To see the logs in the dockerized setup either
 1. Build the apps in attached mode
-```shell script
-$ > docker-compose up --build 
-```
+    ```shell script
+           $ > docker-compose up --build 
+           ```
 1. Logs from each Service
     1. Get the containerID from the running docker instances
         ```shell script
