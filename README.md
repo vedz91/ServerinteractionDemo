@@ -97,13 +97,13 @@ The applications are using [Jacoco](https://www.eclemma.org/jacoco/) Coverage Li
 #### Network Server
 Current coverage is `59%`. 
 
-![Coverage](NetworkServer/coverage.png)
+![Coverage](https://github.com/vedz91/NetworkServer/blob/bb07e13e9bf512f4526c99503f80e702b2700586/coverage.png)
 
 #### Data Server
 
 Current coverage is `58%`. 
 
-![Coverage](DataServer/coverage.png)
+![Coverage](https://github.com/vedz91/DataServer/blob/5082700f35cb4bb7d16461a81b72db5f2ee68bce/coverage.png)
 
 
 ## Logging
