@@ -5,20 +5,26 @@ The application exposes a NetworkServer which is able to perform calculations li
 - [Developer Setup](#developer-setup)
 - [Running the Application](#running-the-application)
 - [Testing](#testing)
+- [Logging](#logging)
 
 ## Developer Setup
 
-1. Make sure you have Docker install in your system. Reaf the [guide](https://docs.docker.com/install/) on how to install it.
+1. Make sure you have Docker install in your system. Read the [guide](https://docs.docker.com/install/) on how to install it.
 1. Verify Docker installation
     ```shell script
    $ >  docker --version                                                                              ✔  35s  2.3.7   seo-platform-itier-staging-us-west-2/seo-platform-itier-staging ⎈ 
         Docker version 19.03.8, build afacb8b
     ``` 
+1. Verify Docker-Compose installation. It is already included in `Docker for MAC`, for other systems please follow the [installation guide](https://docs.docker.com/compose/install/#install-compose).
+    ```shell script
+    $ >  docker-compose --version                                                                             ✔  4s  2.3.7   seo-platform-itier-staging-us-west-2/seo-platform-itier-staging ⎈ 
+        docker-compose version 1.25.4, build 8d51620a
+    ```
 1. Update the Submodule dependencies to the latest (If using Git)
     ```shell script
     $ >  git submodule update --recursive --remote
     ```
-   
+ 
 ## Running the Application
 1. Start the dockerized server using [`Docker Compose`](https://docs.docker.com/compose/).
     ```shell script
@@ -80,3 +86,37 @@ The application exposes a NetworkServer which is able to perform calculations li
 
 The app offers the [Swagger](https://swagger.io/) implementation of the available endpoint. You can access it by navigating to
 [`http://localhost:9090/swagger`](http://localhost:9090/swagger).
+
+
+## Logging
+Currently all the logs are forwarded to the `Console` in both the application to support `Ease of Viewing`. This can be easily changed to file based by changing the logger section in config.yml file to
+```yaml
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: ./logs/data-server.log
+      archivedLogFilenamePattern: ./logs/example-%d.log.gz
+      archivedFileCount: 5
+      timeZone: UTC
+  loggers:
+    org.ServerInteractionDemo: DEBUG
+```
+
+To see the logs in the dockerized setup either
+1. Build the apps in attached mode
+```shell script
+$ > docker-compose up --build 
+```
+1. Logs from each Service
+    1. Get the containerID from the running docker instances
+        ```shell script
+        $ > docker ps                                                                                             
+          CONTAINER ID        IMAGE                           COMMAND                  CREATED             STATUS              PORTS                              NAMES
+          bff3d6a52177        serverinteractiondemo_data      "java -jar DataServe…"   42 minutes ago      Up 35 minutes       9000-9001/tcp                      serverinteractiondemo_data_1
+          c431428c2d18        serverinteractiondemo_network   "java -jar NetworkSe…"   42 minutes ago      Up 35 minutes       0.0.0.0:9090-9091->9090-9091/tcp   serverinteractiondemo_network_1
+        ```
+    1. Check the logs for specific container
+        ```shell script
+        $ > docker logs bff3d6a52177
+        ```
